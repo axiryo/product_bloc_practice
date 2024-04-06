@@ -82,7 +82,9 @@ class ProductDetail {
         discountPercentage: map['discountPercentage'] is int
             ? (map['discountPercentage'] as int).toDouble()
             : map['discountPercentage'] as double,
-        rating: map['rating'] as double,
+        rating: map['rating'] is int
+            ? (map['rating'] as int).toDouble()
+            : map['rating'] as double,
         stock: map['stock'] as int,
         brand: map['brand'] as String,
         category: map['category'] as String,
