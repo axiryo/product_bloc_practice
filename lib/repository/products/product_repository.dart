@@ -2,13 +2,14 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:sprout_technical_exam/core/configs/api_config.dart';
+import 'package:sprout_technical_exam/core/error/exception.dart';
 import 'package:sprout_technical_exam/models/product/product_detail_model.dart';
 import 'package:sprout_technical_exam/models/product/product_list_item_model.dart';
 
 import 'package:http/http.dart' as http;
 
 class ProductRepository {
-  static Future<List<ProductListItem>> fetchProducts(
+  Future<List<ProductListItem>> fetchProducts(
       {required int productSkip,
       int limit = 10,
       List<String> selectedFields = const [
@@ -37,8 +38,7 @@ class ProductRepository {
           throw Exception('Unexpected response structure');
         }
       } else {
-        throw Exception(
-            'Failed to load products with status code: ${response.statusCode}');
+        throw ServerException();
       }
     } catch (e) {
       log(e.toString());
@@ -46,7 +46,7 @@ class ProductRepository {
     }
   }
 
-  static Future<ProductDetail> fetchProductById(String productId) async {
+  Future<ProductDetail> fetchProductById(String productId) async {
     try {
       final String url = 'https://dummyjson.com/products/$productId';
       final response = await http.get(Uri.parse(url));
@@ -55,8 +55,7 @@ class ProductRepository {
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
         return ProductDetail.fromMap(jsonResponse);
       } else {
-        throw Exception(
-            'Failed to load product with status code: ${response.statusCode}');
+        throw ServerException();
       }
     } catch (e) {
       log(e.toString());

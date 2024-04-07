@@ -3,19 +3,19 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class ProductDetail {
-  int id;
-  String title;
-  String description;
-  int price;
-  double discountPercentage;
-  double rating;
-  int stock;
-  String brand;
-  String category;
-  String thumbnail;
-  List<String> images;
+  final int id;
+  final String title;
+  final String description;
+  final int price;
+  final double discountPercentage;
+  final double rating;
+  final int stock;
+  final String brand;
+  final String category;
+  final String thumbnail;
+  final List<String> images;
 
-  ProductDetail({
+  const ProductDetail({
     required this.id,
     required this.title,
     required this.description,

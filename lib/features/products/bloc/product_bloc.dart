@@ -21,8 +21,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(ProductFetchLoadingState());
     try {
       int productSkip = (event.page) * event.limit;
-      List<ProductListItem> products = await ProductRepository.fetchProducts(
-          productSkip: productSkip, limit: event.limit);
+      List<ProductListItem> products = await ProductRepository()
+          .fetchProducts(productSkip: productSkip, limit: event.limit);
       emit(ProductFetchSuccessState(products: products));
     } catch (e) {
       emit(ProductFetchErrorState());
@@ -33,8 +33,8 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       ProductFetchByIdEvent event, Emitter<ProductState> emit) async {
     emit(ProductFetchByIdLoadingState());
     try {
-      ProductDetail product =
-          await ProductRepository.fetchProductById(event.productId.toString());
+      ProductDetail product = await ProductRepository()
+          .fetchProductById(event.productId.toString());
       emit(ProductFetchByIdSuccessState(product: product));
     } catch (e) {
       emit(ProductFetchErrorState());

@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 class ProductListItem {
-  int id;
-  String title;
-  int price;
-  String thumbnail;
-  int stock;
-  double discountPercentage;
+  final int id;
+  final String title;
+  final int price;
+  final String thumbnail;
+  final int stock;
+  final double discountPercentage;
 
-  ProductListItem({
+  const ProductListItem({
     required this.id,
     required this.title,
     required this.price,
