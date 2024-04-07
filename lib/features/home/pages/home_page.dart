@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:sprout_technical_exam/common/widgets/app_bar.dart';
 import 'package:sprout_technical_exam/features/pagination/bloc/pagination_bloc.dart';
 import 'package:sprout_technical_exam/features/pagination/widgets/custom_pagination.dart';
@@ -12,14 +11,15 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductBloc productBloc = GetIt.I.get<ProductBloc>()
-      ..add(ProductFetchEvent(page: 0));
-    final PaginationBloc paginationBloc = GetIt.I.get<PaginationBloc>()
-      ..add(PaginationActionEvent(page: 0));
     return MultiBlocProvider(
       providers: [
-        BlocProvider.value(value: productBloc),
-        BlocProvider.value(value: paginationBloc),
+        BlocProvider(
+          create: (context) => ProductBloc()..add(ProductFetchEvent(page: 0)),
+        ),
+        BlocProvider(
+          create: (context) =>
+              PaginationBloc()..add(PaginationActionEvent(page: 0)),
+        ),
       ],
       child: Scaffold(
         appBar: homeAppBar(context, title: 'PRODUCTS'),

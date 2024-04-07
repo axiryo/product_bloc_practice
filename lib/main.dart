@@ -22,7 +22,7 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ThemeBloc(),
+      create: (context) => getIt<ThemeBloc>(),
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           return ScreenUtilInit(
