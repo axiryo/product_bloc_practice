@@ -20,6 +20,7 @@ class CustomPagination extends StatelessWidget {
             initialPage: state.currentPage,
             controller: paginationController,
             onPageChange: (int index) {
+              if (state.currentPage == index) return;
               context
                   .read<PaginationBloc>()
                   .add(PaginationActionEvent(page: index));
